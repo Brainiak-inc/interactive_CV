@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
-import { MainPageComponent } from './components/main-page/main-page.component';
+import { CommandlineComponent } from './components/command-line/commandline/commandline.component';
 
 export const routes: Routes = [
     {path: '', redirectTo:'main-page', pathMatch: 'full'},
-    {path: 'main-page', component: MainPageComponent}
+    {path: 'main-page', component: CommandlineComponent}
 ];

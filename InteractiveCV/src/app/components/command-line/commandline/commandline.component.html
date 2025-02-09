@@ -1,0 +1,6 @@
+<div id="console">{{ consoleText }}<span *ngIf="isDisplayedInput"></span><span *ngIf="!isDisplayedInput" class="blink">█</span>
+    <div *ngIf="isDisplayedInput" class="input-line">
+        <span>></span>
+        <input class="user-input" type="text" [(ngModel)]="userInput" autofocus><span class="blink">█</span>
+    </div>
+</div>
