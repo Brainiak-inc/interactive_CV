@@ -10,7 +10,7 @@
   @keyframes blink {
     50% { opacity: 0; }
   }
-  
+
   .typing-effect {
     display: inline-block;
     opacity: 0;
@@ -25,11 +25,23 @@
     align-items: center;
     width: auto;
   }
-  .user-input {
-    background: transparent;
-    border: none;
-    color: green;
-    font-family: 'Courier New', monospace;
-    outline: none;
-    width: auto;
-  }
+
+.user-input {
+  background: transparent;
+  border: none;
+  color: green;
+  font-family: 'Courier New', monospace;
+  font-size: 20px;
+  outline: none;
+  caret-color: transparent; /* Скрываем стандартный курсор */
+  width: auto;
+}
+
+.text-sizer {
+  position: absolute;
+  visibility: hidden;
+  white-space: pre;
+  font-family: 'Courier New', monospace;
+}
+
+
