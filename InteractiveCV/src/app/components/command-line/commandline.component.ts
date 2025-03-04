@@ -16,7 +16,7 @@ export class CommandlineComponent implements OnInit {
 
   @HostListener('document:keydown.enter', ['$event']) handleEnterPress(event: KeyboardEvent) {
     if (!this.isDisplayedInput) {
-      this.typeCharacter(true);
+      this.skipTypingAnimation();
     }
   }
 
@@ -34,42 +34,43 @@ export class CommandlineComponent implements OnInit {
   consoleText: string = '';
   userInput: string = '';
   isDisplayedInput: boolean = false;
+  private typingTimeout: any;
 
   ngOnInit() {
     this.typeCharacter();
   }
 
-  typeCharacter(skipAnimation = false) {
-    if (skipAnimation) {
-      this.consoleText = this.text.join("\n");
-      this.isDisplayedInput = true;
-      setTimeout(() => this.consoleInput.nativeElement.focus(), 0);
-      return;
-    }
-
+  typeCharacter() {
     if (this.index < this.text.length) {
       if (this.charIndex < this.text[this.index].length) {
         this.consoleText += this.text[this.index][this.charIndex];
         this.charIndex++;
-        setTimeout(() => this.typeCharacter(), 50);
-      } else if (this.index < this.text.length - 1) {
+        this.typingTimeout = setTimeout(() => this.typeCharacter(), 50);
+      } else {
         this.consoleText += "\n";
         this.charIndex = 0;
         this.index++;
-        setTimeout(() => this.typeCharacter(), 500);
-      } else {
-        this.isDisplayedInput = true;
-        setTimeout(() => {
-          if (this.consoleInput) {
-            this.consoleInput.nativeElement.focus();
-          }
-          this.adjustWidth();
-        }, 0);
+        this.typingTimeout = setTimeout(() => this.typeCharacter(), 500);
       }
+    } else {
+      this.isDisplayedInput = true;
+      setTimeout(() => this.consoleInput?.nativeElement?.focus(), 0);
     }
   }
 
+  skipTypingAnimation() {
+    clearTimeout(this.typingTimeout); // Очищаем текущую анимацию
+    this.consoleText = this.text.join("\n"); // Выводим весь текст сразу
+    this.isDisplayedInput = true;
+    setTimeout(() => this.consoleInput?.nativeElement?.focus(), 0);
+  }
+
   adjustWidth() {
+    let userInput: string | number;
+    let userName:  string | number;
+    userInput = 5;
+    userInput = "Name";
+    userName = userInput;
     if (!this.textSizer || !this.inputField) {
       console.warn('textSizer или inputField не инициализированы!');
       return;
@@ -89,4 +90,6 @@ export class CommandlineComponent implements OnInit {
 
 
   }
+
+
 
