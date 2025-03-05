@@ -1,0 +1,18 @@
+<div id="console">
+  {{ consoleText }}
+  <span *ngIf="isDisplayedInput"></span>
+  <span *ngIf="!isDisplayedInput" class="blink">█</span>
+  <div *ngIf="isDisplayedInput" class="input-line">
+    <span>></span>
+    <span #textSizer class="text-sizer">{{ userInput || '&nbsp;' }}</span>
+    <input
+      class="user-input"
+      type="text"
+      [(ngModel)]="userInput"
+      (input)="adjustWidth()"
+      #inputField
+      autofocus
+    >
+    <span class="blink">█</span>
+  </div>
+</div>
