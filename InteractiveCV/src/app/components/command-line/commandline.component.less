@@ -1,0 +1,47 @@
+
+#console {
+    white-space: pre-wrap;
+    overflow: hidden;
+    font-size: 20px;
+  }
+  .blink {
+    animation: blink 1s step-end infinite;
+  }
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+
+  .typing-effect {
+    display: inline-block;
+    opacity: 0;
+    animation: appear 0.5s forwards;
+  }
+  @keyframes appear {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  .input-line {
+    display: flex;
+    align-items: center;
+    width: auto;
+  }
+
+.user-input {
+  background: transparent;
+  border: none;
+  color: green;
+  font-family: 'Courier New', monospace;
+  font-size: 20px;
+  outline: none;
+  caret-color: transparent; /* Скрываем стандартный курсор */
+  width: auto;
+}
+
+.text-sizer {
+  position: absolute;
+  visibility: hidden;
+  white-space: pre;
+  font-family: 'Courier New', monospace;
+}
+
+
