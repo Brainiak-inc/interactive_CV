@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms';
 export class CommandlineComponent implements OnInit {
   @ViewChild('textSizer', { static: false }) textSizer!: ElementRef;
   @ViewChild('inputField', { static: false }) inputField!: ElementRef;
-  @ViewChild('consoleInput', { static: false }) consoleInput!: ElementRef;
+  @ViewChild('inputField', { static: false }) consoleInput!: ElementRef;
 
   @HostListener('document:keydown.enter', ['$event']) handleEnterPress(event: KeyboardEvent) {
     if (!this.isDisplayedInput) {
@@ -25,7 +25,7 @@ export class CommandlineComponent implements OnInit {
     "Loading profile...",
     "Name: Ilia Isaev",
     "Skills: JavaScript, Angular, HTML, CSS",
-    "Experience: 5+ years in web development",
+    "Experience: 4+ years in web development",
     "Type 'help' for available commands."
   ];
 
@@ -54,7 +54,7 @@ export class CommandlineComponent implements OnInit {
       }
     } else {
       this.isDisplayedInput = true;
-      setTimeout(() => this.consoleInput?.nativeElement?.focus(), 0);
+      setTimeout(() => this.consoleInput.nativeElement.focus(), 0);
     }
   }
 
@@ -66,11 +66,6 @@ export class CommandlineComponent implements OnInit {
   }
 
   adjustWidth() {
-    let userInput: string | number;
-    let userName:  string | number;
-    userInput = 5;
-    userInput = "Name";
-    userName = userInput;
     if (!this.textSizer || !this.inputField) {
       console.warn('textSizer или inputField не инициализированы!');
       return;
