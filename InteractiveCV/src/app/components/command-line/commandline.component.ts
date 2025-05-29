@@ -3,11 +3,12 @@ import {Component, ElementRef, ViewChild, AfterViewInit, OnInit, HostListener} f
 import { FormsModule } from '@angular/forms';
 import  {Commands} from './../../enums'
 import {Router} from '@angular/router';
+import { HelpComponentComponent } from '../help-component/help-component.component';
 
 @Component({
   selector: 'app-commandline',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, HelpComponentComponent],
   templateUrl: './commandline.component.html',
   styleUrl: './commandline.component.less'
 })
@@ -98,28 +99,33 @@ export class CommandlineComponent implements OnInit {
 
     switch (command) {
       case Commands.Help:
-        this.showHelp = true; // Показываем HelpComponent
+        this.showHelp = true;
+        this.consoleText += "\n>Displaying help information...";
         break;
 
       case Commands.Work_experience:
+        this.consoleText += "\nNavigating to work experience...";
         this.router.navigate(['/work-experience']);
         break;
 
       case Commands.Education:
+        this.consoleText += "\nNavigating to education...";
         this.router.navigate(['/education']);
         break;
 
       case Commands.Skills:
+        this.consoleText += "\nNavigating to skills...";
         this.router.navigate(['/skills']);
         break;
 
       case Commands.Projects:
+        this.consoleText += "\nNavigating to projects...";
         this.router.navigate(['/projects']);
         break;
 
       case Commands.Clear:
-        this.consoleText = '';
-        this.showHelp = false; // Скрываем HelpComponent при очистке консоли
+        this.typeCharacter;
+        this.showHelp = false;
         break;
 
       default:
