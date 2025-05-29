@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import {Component, ElementRef, ViewChild, AfterViewInit, OnInit, HostListener} from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import  {Command} from './../../enums'
+import  {Commands} from './../../enums'
 import {Router} from '@angular/router';
 
 @Component({
@@ -97,27 +97,27 @@ export class CommandlineComponent implements OnInit {
     this.userInput = '';
 
     switch (command) {
-      case Command.Help:
+      case Commands.Help:
         this.showHelp = true; // Показываем HelpComponent
         break;
 
-      case Command.Work_experience:
+      case Commands.Work_experience:
         this.router.navigate(['/work-experience']);
         break;
 
-      case Command.Education:
+      case Commands.Education:
         this.router.navigate(['/education']);
         break;
 
-      case Command.Skills:
+      case Commands.Skills:
         this.router.navigate(['/skills']);
         break;
 
-      case Command.Projects:
+      case Commands.Projects:
         this.router.navigate(['/projects']);
         break;
 
-      case Command.Clear:
+      case Commands.Clear:
         this.consoleText = '';
         this.showHelp = false; // Скрываем HelpComponent при очистке консоли
         break;
