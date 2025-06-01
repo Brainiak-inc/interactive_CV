@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {Component, ElementRef, ViewChild, AfterViewInit, OnInit, HostListener} from '@angular/core';
+import {Component, ElementRef, ViewChild, AfterViewInit, OnInit, HostListener, inject, Renderer2} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import  {Commands} from './../../enums'
 import {Router} from '@angular/router';
@@ -12,12 +12,19 @@ import { HelpComponentComponent } from '../help-component/help-component.compone
   templateUrl: './commandline.component.html',
   styleUrl: './commandline.component.less'
 })
-export class CommandlineComponent implements OnInit {
-  constructor(private router: Router) {};
+export class CommandlineComponent implements OnInit, AfterViewInit {
+  private readonly _renderer = inject(Renderer2);
+  private readonly _router = inject(Router);
 
+  @HostListener('document:click', ['$event'])
+    onDocumentClick(event: MouseEvent) {
+      if(this.inputField && event.target !== this.inputField.nativeElement) {
+        this.focusInput();
+      }
+    }
+  
   @ViewChild('textSizer', { static: false }) textSizer!: ElementRef;
   @ViewChild('inputField', { static: false }) inputField!: ElementRef;
-  @ViewChild('inputField', { static: false }) consoleInput!: ElementRef;
 
   @HostListener('document:keydown.enter', ['$event']) handleEnterPress(event: KeyboardEvent) {
     if (!this.isDisplayedInput) {
@@ -46,6 +53,20 @@ export class CommandlineComponent implements OnInit {
     this.typeCharacter();
   }
 
+  ngAfterViewInit() {
+    this.focusInput();
+
+    this._renderer.listen(this.inputField.nativeElement, 'blur', () => {
+      setTimeout(() => {
+        this.focusInput();
+      }, 0);
+    });
+}
+
+focusInput() {
+  this.inputField?.nativeElement?.focus();
+}
+
   typeCharacter() {
     if (this.index < this.text.length) {
       if (this.charIndex < this.text[this.index].length) {
@@ -60,7 +81,7 @@ export class CommandlineComponent implements OnInit {
       }
     } else {
       this.isDisplayedInput = true;
-      setTimeout(() => this.consoleInput.nativeElement.focus(), 0);
+      setTimeout(() => this.inputField.nativeElement.focus(), 0);
     }
   }
 
@@ -68,7 +89,7 @@ export class CommandlineComponent implements OnInit {
     clearTimeout(this.typingTimeout);
     this.consoleText = this.text.join("\n");
     this.isDisplayedInput = true;
-    setTimeout(() => this.consoleInput?.nativeElement?.focus(), 0);
+    setTimeout(() => this.inputField?.nativeElement?.focus(), 0);
   }
 
   adjustWidth() {
@@ -105,22 +126,22 @@ export class CommandlineComponent implements OnInit {
 
       case Commands.Work_experience:
         this.consoleText += "\nNavigating to work experience...";
-        this.router.navigate(['/work-experience']);
+        this._router.navigate(['/work-experience']);
         break;
 
       case Commands.Education:
         this.consoleText += "\nNavigating to education...";
-        this.router.navigate(['/education']);
+        this._router.navigate(['/education']);
         break;
 
       case Commands.Skills:
         this.consoleText += "\nNavigating to skills...";
-        this.router.navigate(['/skills']);
+        this._router.navigate(['/skills']);
         break;
 
       case Commands.Projects:
         this.consoleText += "\nNavigating to projects...";
-        this.router.navigate(['/projects']);
+        this._router.navigate(['/projects']);
         break;
 
       case Commands.Clear:
@@ -131,9 +152,10 @@ export class CommandlineComponent implements OnInit {
       default:
         this.consoleText += "\nUnknown command. Type 'help' for a list of commands.";
     }
+    this.focusInput();
   }
 
-  }
+}
 
 
 
