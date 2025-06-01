@@ -38,16 +38,18 @@ export class CommandlineComponent implements OnInit, AfterViewInit {
     "Name: Ilia Isaev",
     "Skills: Angular, JavaScript, TypeScript, RxJs, HTML, CSS",
     "Experience: 4+ years in web development",
-    "Type 'help' for available commands."
+    "Type 'help' for available commands..."
   ];
 
   private index = 0;
   private charIndex = 0;
+  private typingTimeout: any;
+  
   consoleText: string = '';
   userInput: string = '';
   isDisplayedInput: boolean = false;
-  private typingTimeout: any;
   showHelp: boolean = false;
+  showRoutedContent: boolean = false;
 
   ngOnInit() {
     this.typeCharacter();
@@ -117,27 +119,32 @@ focusInput() {
 
       case Commands.Work:
         this.consoleText += "\nNavigating to work experience...";
+        this.showRoutedContent = true;
         this._router.navigate(['/work']);
         break;
 
       case Commands.Education:
         this.consoleText += "\nNavigating to education...";
+        this.showRoutedContent = true;
         this._router.navigate(['/education']);
         break;
 
       case Commands.Skills:
         this.consoleText += "\nNavigating to skills...";
+        this.showRoutedContent = true;
         this._router.navigate(['/skills']);
         break;
 
       case Commands.Projects:
         this.consoleText += "\nNavigating to projects...";
+        this.showRoutedContent = true;
         this._router.navigate(['/projects']);
         break;
 
       case Commands.Clear:
         this.typeCharacter;
         this.showHelp = false;
+        this.showRoutedContent = false;
         this._router.navigate(['/']);
         break;
 

@@ -3,11 +3,17 @@
   @if(showHelp) {
     <app-help-component></app-help-component>
   }
-  <router-outlet />
+
+  <ng-container *ngIf="showRoutedContent">
+    <div class="content-wrapper">
+      <router-outlet />
+    </div>
+  </ng-container>
+  
   <span *ngIf="isDisplayedInput"></span>
   <span *ngIf="!isDisplayedInput" class="blink">█</span>
   <div *ngIf="isDisplayedInput" class="input-line">
-    <span>></span>
+    <span>> </span>
     <span #textSizer class="text-sizer">{{ userInput || '&nbsp;' }}</span>
     <input
       #inputField
