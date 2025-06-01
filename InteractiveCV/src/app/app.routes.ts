@@ -1,12 +1,16 @@
 import { Routes } from '@angular/router';
-import { LayoutComponent } from './components/layout-component/layout/layout.component';
+import { CommandlineComponent } from './components/command-line/commandline.component';
 
 export const routes: Routes = [
-    {path: '', component: LayoutComponent,
+    {path: '', loadComponent: () => 
+      import('./components/command-line/commandline.component')
+        .then(m => m.CommandlineComponent),
       children: [
-        {path: 'help', 
-          loadComponent: () => import('./components/help-component/help-component.component').then(m => m.HelpComponentComponent)},
-        
+        {path: 'work',
+          loadComponent: () => 
+            import('./components/work-experience-layout/work-experience-layout.component')
+              .then(m => m.WorkExperienceLayoutComponent)
+        },
       ]
     },
     

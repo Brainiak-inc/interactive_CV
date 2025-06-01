@@ -3,6 +3,7 @@
   @if(showHelp) {
     <app-help-component></app-help-component>
   }
+  <router-outlet />
   <span *ngIf="isDisplayedInput"></span>
   <span *ngIf="!isDisplayedInput" class="blink">█</span>
   <div *ngIf="isDisplayedInput" class="input-line">
