@@ -1,7 +1,13 @@
 import { Routes } from '@angular/router';
+import { LayoutComponent } from './components/layout-component/layout/layout.component';
 
 export const routes: Routes = [
-    {path: '', redirectTo:'main-page', pathMatch: 'full'},
-    {path: 'main-page',
-      loadComponent: () => import('./components/command-line/commandline.component').then(m => m.CommandlineComponent)}
+    {path: '', component: LayoutComponent,
+      children: [
+        {path: 'help', 
+          loadComponent: () => import('./components/help-component/help-component.component').then(m => m.HelpComponentComponent)},
+        
+      ]
+    },
+    
 ];
