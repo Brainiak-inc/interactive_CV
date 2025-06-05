@@ -1,6 +1,6 @@
 export enum Commands {
   Help = 'help',
-  Work_experience = 'work experience',
+  Work = 'work',
   Education = 'education',
   Skills = 'skills',
   Projects = 'projects',
