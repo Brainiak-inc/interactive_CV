@@ -144,7 +144,6 @@ focusInput() {
       case Commands.Clear:
         this.typeCharacter;
         this.showHelp = false;
-        this.showRoutedContent = false;
         this._router.navigate(['/']);
         break;
 

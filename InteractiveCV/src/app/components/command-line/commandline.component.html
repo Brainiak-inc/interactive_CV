@@ -1,29 +1,33 @@
 <div id="console">
+  
   {{ consoleText }}
+  
   @if(showHelp) {
     <app-help-component></app-help-component>
   }
 
-  <ng-container *ngIf="showRoutedContent">
+  @if(showRoutedContent){
     <div class="content-wrapper">
       <router-outlet />
     </div>
-  </ng-container>
-  
-  <span *ngIf="isDisplayedInput"></span>
-  <span *ngIf="!isDisplayedInput" class="blink">█</span>
-  <div *ngIf="isDisplayedInput" class="input-line">
-    <span>> </span>
-    <span #textSizer class="text-sizer">{{ userInput || '&nbsp;' }}</span>
-    <input
-      #inputField
-      class="user-input"
-      type="text"
-      [(ngModel)]="userInput"
-      (input)="adjustWidth()"
-      (keyup.enter)="executeCommand()"
-      autofocus
-    >
+  }
+ 
+  @if(!isDisplayedInput){
     <span class="blink">█</span>
-  </div>
+  } @else {
+    <div class="input-line">
+      <span>> </span>
+      <span #textSizer class="text-sizer">{{ userInput || '&nbsp;' }}</span>
+      <input
+        #inputField
+        class="user-input"
+        type="text"
+        [(ngModel)]="userInput"
+        (input)="adjustWidth()"
+        (keyup.enter)="executeCommand()"
+        autofocus
+      >
+      <span class="blink">█</span>
+    </div>
+  }
 </div>
