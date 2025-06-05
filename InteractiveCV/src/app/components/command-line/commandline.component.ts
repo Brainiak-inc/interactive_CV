@@ -114,7 +114,7 @@ focusInput() {
     switch (command) {
       case Commands.Help:
         this.showHelp = true;
-        this.consoleText += "\n>Displaying help information...";
+        this.consoleText += "\n> Displaying help information...";
         break;
 
       case Commands.Work:
