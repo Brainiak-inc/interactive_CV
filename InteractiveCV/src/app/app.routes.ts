@@ -11,6 +11,12 @@ export const routes: Routes = [
             import('./components/work-experience-layout/work-experience-layout.component')
               .then(m => m.WorkExperienceLayoutComponent)
         },
+        {
+          path: 'skills',
+          loadComponent: () => 
+            import('./components/skills-layout/skills-layout/skills-layout.component')
+              .then(m => m.SkillsLayoutComponent)
+        }
       ]
     },
     
