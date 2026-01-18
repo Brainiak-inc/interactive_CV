@@ -30,7 +30,7 @@ jobs:
         run: npm run build -- --base-href /interactive_CV/
 
       - name: Copy index.html to 404.html
-        run: cp dist/<project-name>/index.html dist/<project-name>/404.html
+        run: cp dist/interactive_cv/index.html dist/interactive_cv/404.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
