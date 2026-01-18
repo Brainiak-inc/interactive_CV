@@ -29,6 +29,9 @@ jobs:
       - name: Build Angular
         run: npm run build -- --base-href /interactive_CV/
 
+      - name: Copy index.html to 404.html
+        run: cp dist/<project-name>/index.html dist/<project-name>/404.html
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
