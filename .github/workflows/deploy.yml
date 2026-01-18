@@ -35,7 +35,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-        path: dist/interactive-cv/browser
+          path: dist/interactive-cv/browser
 
   deploy:
     needs: build
