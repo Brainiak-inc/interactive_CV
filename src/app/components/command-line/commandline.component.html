@@ -1,7 +1,7 @@
 <div id="console">
-  
+
   {{ consoleText }}
-  
+
   @if(showHelp) {
     <app-help-component></app-help-component>
   }
@@ -11,7 +11,7 @@
       <router-outlet />
     </div>
   }
- 
+
   @if(!isDisplayedInput){
     <span class="blink">█</span>
   } @else {
@@ -26,7 +26,7 @@
         (input)="adjustWidth()"
         (keyup.enter)="executeCommand()"
         autofocus
-      >
+      />
       <span class="blink">█</span>
     </div>
   }
